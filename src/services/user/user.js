@@ -1,6 +1,5 @@
-import { json } from "express";
-import pool from "../../config/db.js";
 import { v4 as uuid } from "uuid";
+import pool from "../../config/db.js";
 
 export const createUser = async (req, res) => {
   const { name, age, user, password } = req.body;
@@ -115,31 +114,4 @@ export const loginUser = async (req, res) => {
       error: e.message,
     });
   }
-};
-
-export const meUser = async (req, res) => {
-  const { token } = req.headers;
-
-  const exists = await pool.query("SELECT * FROM users WHERE user_token = $1", [
-    token,
-  ]);
-
-
-  if (exists.rows.length == 0) {
-    return res.status(401).json({
-      success: false,
-      error: "Invalid token",
-    });
-  }
-
-  const user = exists.rows[0];
-
-  delete user.password
-  delete user.user_token
-  
-  return res.status(200).json({
-    success: true,
-    message: "Success verified",
-    user: user,
-  });
 };
