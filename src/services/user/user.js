@@ -57,7 +57,7 @@ export const loginUser = async (req, res) => {
 
   if (!(user && password)) {
     return res.status(400).json({
-      sucess: false,
+      success: false,
       error: "user and password are required",
     });
   }
@@ -65,7 +65,7 @@ export const loginUser = async (req, res) => {
   // Caso a senha tem que ter 8 digitos
   if (password.length < 8) {
     return res.status(400).json({
-      sucess: false,
+      success: false,
       error: "The password is decrease than 8",
     });
   }
@@ -78,7 +78,7 @@ export const loginUser = async (req, res) => {
 
   if (loginExists.rows.length == 0) {
     return res.status(401).json({
-      sucess: false,
+      success: false,
       error: "User not exists",
     });
   }
@@ -110,7 +110,7 @@ export const loginUser = async (req, res) => {
     });
   } catch (e) {
     return res.status(500).json({
-      sucess: false,
+      success: false,
       error: e.message,
     });
   }

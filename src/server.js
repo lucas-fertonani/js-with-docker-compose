@@ -9,11 +9,17 @@ import {
   postClientById,
   deleteClientById,
 } from "./services/customer/customer.js";
+import {
+  getOrders,
+  getOrderById,
+  createOrders,
+} from "./services/orders/orders.js";
 
 const port = 3000;
 
 const app = express();
 app.use(express.json());
+
 // Habilita CORS para todas as origens e métodos
 app.use(cors());
 
@@ -50,5 +56,17 @@ app.post("/api/cliente/:id", auth, async (req, res) => {
 
 app.delete("/api/cliente/:id", auth, async (req, res) => {
   await deleteClientById(req, res);
+});
+
+app.get("/api/pedidos", auth, async (req, res) => {
+  await getOrders(req, res);
+});
+
+app.get("/api/pedidos/:id", auth, async (req, res) => {
+  await getOrderById(req, res);
+});
+
+app.post("/api/pedidos", auth, async (req, res) => {
+  await createOrders(req, res);
 });
 app.listen(port, () => console.log(`Server has been started on port ${port}`));

@@ -28,7 +28,7 @@ export const getClients = async (req, res) => {
 export const createClients = async (req, res) => {
   if (!req.body) {
     return res.status(400).json({
-      sucess: false,
+      success: false,
       error: "body is required",
     });
   }
@@ -38,7 +38,7 @@ export const createClients = async (req, res) => {
 
   if (!(name && phone && birthDate)) {
     return res.status(400).json({
-      sucess: false,
+      success: false,
       error: "name, phone and birthDate are required",
     });
   }
@@ -60,12 +60,12 @@ export const createClients = async (req, res) => {
     delete client.deleted_at;
 
     return res.status(201).json({
-      sucess: true,
+      success: true,
       data: client,
     });
   } catch (e) {
     return res.status(500).json({
-      sucess: false,
+      success: false,
       error: `Error trying insert on database ${e}`,
     });
   }
@@ -77,7 +77,7 @@ export const getClientById = async (req, res) => {
 
   if (!clientId) {
     return res.status(400).json({
-      sucess: false,
+      success: false,
       error: "Error: id is not found",
     });
   }
@@ -94,7 +94,7 @@ export const getClientById = async (req, res) => {
 
   if (clients.rows.length == 0) {
     return res.status(404).json({
-      sucess: false,
+      success: false,
       error: "clients rows is 0",
     });
   }
@@ -104,7 +104,7 @@ export const getClientById = async (req, res) => {
   delete formatedClient.userid;
 
   return res.status(200).json({
-    sucess: true,
+    success: true,
     data: formatedClient,
   });
 };
@@ -137,7 +137,7 @@ export const postClientById = async (req, res) => {
   try {
     await pool.query(query);
     return res.status(201).json({
-      sucess: true,
+      success: true,
       data: {
         clientId,
         fieldsUpdated: req.body,
@@ -145,7 +145,7 @@ export const postClientById = async (req, res) => {
     });
   } catch (e) {
     return res.status(500).json({
-      sucess: false,
+      success: false,
       error: e,
     });
   }
@@ -181,7 +181,7 @@ export const deleteClientById = async (req, res) => {
     });
   } catch (e) {
     return res.status(500).json({
-      sucess: false,
+      success: false,
       error: e,
     });
   }
