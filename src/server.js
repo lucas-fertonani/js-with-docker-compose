@@ -13,6 +13,9 @@ import {
   getOrders,
   getOrderById,
   createOrders,
+  deleteOrdersById,
+  getOrdersClientsById,
+  postOrdersById,
 } from "./services/orders/orders.js";
 
 const port = 3000;
@@ -68,5 +71,17 @@ app.get("/api/pedidos/:id", auth, async (req, res) => {
 
 app.post("/api/pedidos", auth, async (req, res) => {
   await createOrders(req, res);
+});
+
+app.delete("/api/pedidos/:id", auth, async (req, res) => {
+  await deleteOrdersById(req, res);
+});
+
+app.get("/api/pedidos/cliente/:id", auth, async (req, res) => {
+  await getOrdersClientsById(req, res);
+});
+
+app.post("/api/pedidos/:id", auth, async (req, res) => {
+  await postOrdersById(req, res);
 });
 app.listen(port, () => console.log(`Server has been started on port ${port}`));
